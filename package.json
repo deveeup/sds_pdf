@@ -1,16 +1,16 @@
 {
-  "name": "sds_pdf",
-  "version": "0.0.0",
-  "private": true,
+  "name": "sds-pdf",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
     "express": "^4.19.2",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
     "pdf-lib": "^1.17.1"
   }
 }
