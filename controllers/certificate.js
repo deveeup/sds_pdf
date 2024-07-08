@@ -1,7 +1,10 @@
 const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
-const { URLS } = require('../constants')
+const { URLS } = require('../constants');
+
+const { shortMonths } = require("../utils/index");
 
 const getCertificate = async (req, res) => {
+    const { query: {id, name, date} } = req;
     const { certificate } = URLS;
     const existingPdfBytes = await fetch(certificate).then((res) => res.arrayBuffer());
 
@@ -16,7 +19,7 @@ const getCertificate = async (req, res) => {
     const { width, height } = firstPage.getSize();
 
     // Certificate number
-    firstPage.drawText("SA-280913", {
+    firstPage.drawText(id, {
       x: width - 160,
       y: height - 87,
       size: 16,
@@ -24,8 +27,6 @@ const getCertificate = async (req, res) => {
     });
 
     // Pet name
-    const name = "ALASKA";
-
     const couple = name.length % 2 === 0;
     const letterSize = 20;
 
@@ -40,7 +41,10 @@ const getCertificate = async (req, res) => {
     });
 
     // Register date
-    firstPage.drawText("On this 2th May 2023", {
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth();
+
+    firstPage.drawText(`On this ${date} ${shortMonths[month]} ${year}`, {
       x: width - 230,
       y: 100,
       size: 13,
