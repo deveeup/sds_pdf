@@ -20,8 +20,8 @@ const getCertificate = async (req, res) => {
 
     // Certificate number
     firstPage.drawText(id, {
-      x: width - 160,
-      y: height - 87,
+      x: width - 165,
+      y: height - 88,
       size: 16,
       font: helveticaBold,
     });
@@ -33,7 +33,7 @@ const getCertificate = async (req, res) => {
     const finishSize = letterSize + couple ? 10 : 0;
     const dynamicTitlePosition = ((name.length / 2) * letterSize) + finishSize;
 
-    firstPage.drawText(name, {
+    firstPage.drawText(String(name).toLocaleUpperCase(), {
       x: width - 430 - dynamicTitlePosition,
       y: height - 270,
       size: 34,
@@ -53,7 +53,7 @@ const getCertificate = async (req, res) => {
     const pdfBytes = await pdfDoc.save();
 
     const fileData = pdfBytes;
-    const fileName = "hello_world.pdf";
+    const fileName = `${id}-C.pdf`;
     const fileType = "application/pdf";
 
     res.writeHead(200, {
