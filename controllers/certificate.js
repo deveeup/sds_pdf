@@ -1,10 +1,8 @@
 const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
 const { URLS } = require('../constants');
 
-const { shortMonths } = require("../utils/index");
-
 const getCertificate = async (req, res) => {
-    const { query: {id, name, date} } = req;
+    const { query: {id, name, day, month, year} } = req;
     const { certificate } = URLS;
     const existingPdfBytes = await fetch(certificate).then((res) => res.arrayBuffer());
 
@@ -41,10 +39,7 @@ const getCertificate = async (req, res) => {
     });
 
     // Register date
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth();
-
-    firstPage.drawText(`On this ${date} ${shortMonths[month]} ${year}`, {
+    firstPage.drawText(`On this ${day}, ${month} ${year}`, {
       x: width - 230,
       y: 100,
       size: 13,
